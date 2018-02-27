@@ -8,7 +8,7 @@ var count = 0;
 
 var showQuestion;
 
-//object of questions 
+//array of questions
 var questions = [
   {
     ask: "which animal is spongebob's best friend?",
@@ -136,14 +136,13 @@ function stopGame() {
 
 function startGame() {
 
-    // TODO: Use setInterval to run nextQuestion.
-    // interval of 5 seconds 
+    // interval of 4 seconds before next question 
     showQuestion = setInterval(nextQuestion, 4000);
     console.log(count);
     questionRotation(); 
 
 
-    // this works but trying to hook to when they select the right answer 
+    // this works but trying to hook to when they select the right answer for each 
   
 
       $("#a").click(function() {
