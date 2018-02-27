@@ -95,8 +95,7 @@ var questions = [
 // 0a, 1c, 2d, 3b, 4a, 5c, 6b, 7d, 8c, 9b, 
 
 $("#start").click(startGame);
-// $("#stop").click(stopGame);
-// stopGame not defined yet 
+$("#stop").click(stopGame);
 
 
 
@@ -125,6 +124,13 @@ function nextQuestion() {
   count++; 
   console.log(count);
   questionRotation();
+};
+
+
+function stopGame() {
+  count = 0; 
+  console.log(count);
+  clearInterval(showQuestion);
 };
 
 
@@ -161,7 +167,5 @@ function startGame() {
       // $(".statusMeme").prepend('<img src="assets/images/noresponse.jpg" />');
       // });
 
-  };
-  // doesnt work function stopGame() {
-  // clearInterval(showQuestion);
-  // }
+  
+};
