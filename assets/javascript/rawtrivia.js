@@ -94,17 +94,30 @@ var questions = {
 //answer key: 
 // 1a, 2c, 3d, 4b, 5a, 6c, 7b, 8d, 9c, 10b, 
 
+$("#start").click(startGame);
+$("#stop").click(stopGame);
+
+
 
 var randomNumber = Math.floor(Math.random() * questions.length);
 var pickedQuestion = questions[randomNumber];
 
-$("#start").click(startGame);
+function nextQuestion() {
+  count++; 
+  console.log(count);
+  $(".question").text(questions.two.ask);
+  $("#a").text("A: "+questions.two.a); 
+  $("#b").text("B: "+questions.two.b); 
+  $("#c").text("C: "+questions.two.c);
+  $("#d").text("D: "+questions.two.d);
+}
+
 
 function startGame() {
 
     // TODO: Use showImage to hold the setInterval to run nextImage.
     // count++ interval of 15 seconds 
-    showQuestion = setInterval(count++, 15000);
+    showQuestion = setInterval(nextQuestion, 5000);
     console.log(count);
 
     $(".question").text(questions.one.ask);
@@ -132,16 +145,15 @@ function startGame() {
       //if NO CLICK function() {
       // alert("you chose no answer, time's up");
       // noResponse++;
+      // console.log(noResponse);
       // $(".statusMeme").prepend('<img src="assets/images/noresponse.jpg" />');
       // });
 
       //  if (count === questions.length) {
       // count = 0;
+      // } 
   }
 
-
-  // more pseudocoding 
-  // if userChoice.one === #a, display win! and wins++
-  // if userChoice.one !== #a, display lose! and losses++
-  // if userChoice.one === null, display NO RESPONSE! and noResponse++ 
-
+  // doesnt work function stopGame() {
+  // clearInterval(showQuestion);
+  // }
