@@ -132,7 +132,7 @@ function startGame() {
 
     // TODO: Use setInterval to run nextQuestion.
     // interval of 5 seconds 
-    showQuestion = setInterval(nextQuestion, 1000);
+    showQuestion = setInterval(nextQuestion, 4000);
     console.log(count);
     questionRotation(); 
 
