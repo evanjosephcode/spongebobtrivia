@@ -9,16 +9,16 @@ var count = 0;
 var showQuestion;
 
 //object of questions 
-var questions = {
-  one: {
-    ask: "Which animal is spongebob's best friend?",
+var questions = [
+  {
+    ask: "which animal is spongebob's best friend?",
     a: "Starfish",
     b: "Squid",
     c: "Crab",
     d: "Stingray", 
   },
 
-  two: {
+  {
     ask: "where does spongebob work?",
     a: "Patrick's Palace",
     b: "Buzzfeed",
@@ -26,7 +26,7 @@ var questions = {
     d: "Longjohn Bobbies",
   },
 
-  three: {
+  {
     ask: "how big is Krabby Patty's arch nemesis, Plankton?",
     a: "bigly yuge!",
     b: "average size, nothing special",
@@ -34,7 +34,7 @@ var questions = {
     d: "extremely small",
   },
 
-  four: {
+  {
     ask: "the actor with the following last name has which same first name as Spongebob's pet snail?",
     a: "Cruise",
     b: "Oldman", 
@@ -42,7 +42,7 @@ var questions = {
     d: "Baldwin",
   },
 
-  five: {
+  {
     ask: "What does Sandy the snail wear to be able to breathe while underwater?",
     a: "astronaut helmet",
     b: "defibrillator", 
@@ -50,7 +50,7 @@ var questions = {
     d: "Squidward",
   },
 
-  six: {
+  {
     ask: "what instrument does Squidward play?",
     a: "sax",
     b: "cowbell",
@@ -58,7 +58,7 @@ var questions = {
     d: "trumpet",
   },
 
-  seven: {
+  {
     ask: "what does Patrick's domestic situation look like?",
     a: "his house is bigger than Squidward's",
     b: "he lives under a rock",
@@ -66,7 +66,7 @@ var questions = {
     d: "he's a nomad",
   },
 
-  eight: {
+  {
     ask: "How many seasons has Spongebob held down?",
     a: "nine",
     b: "thirteen",
@@ -74,7 +74,7 @@ var questions = {
     d: "eleven",
   },
 
-  nine: {
+  {
     ask: "which sort of character is the live actor featured in the intro of the show?",
     a: "sailor",
     b: "generic narrator",
@@ -82,49 +82,61 @@ var questions = {
     d: "there is no live actor in the intro",
   },
 
-  ten: {
+  {
     ask: "what happen's to spongebob's muscles in the bodybuilding episode?",
     a: "he loses strength by being lazy",
     b: "he never had strength and cheated, his fake arms deflate",
     c: "Plankton gets magical powers to impersonate Spongebob and gain strength overnight",
     d: "Sandy gives him land powers to be able to bench like a boss",
   },
-}
+];
 
 //answer key: 
-// 1a, 2c, 3d, 4b, 5a, 6c, 7b, 8d, 9c, 10b, 
+// 0a, 1c, 2d, 3b, 4a, 5c, 6b, 7d, 8c, 9b, 
 
 $("#start").click(startGame);
-$("#stop").click(stopGame);
+// $("#stop").click(stopGame);
+// stopGame not defined yet 
 
 
 
-var randomNumber = Math.floor(Math.random() * questions.length);
-var pickedQuestion = questions[randomNumber];
+// may not be needed var randomNumber = Math.floor(Math.random() * questions.length);
+// may not be needed var pickedQuestion = questions[randomNumber];
+
+
+
+function questionRotation() {
+
+  // reset count to -1 bc then nextQuestion with count++ makes count= 0 and proceeds with else statement starting at questions[0]
+  if (count === questions.length) {
+    count = -1;
+  } 
+
+  else {
+  $(".question").text(questions[count].ask);
+  $("#a").text("A: "+questions[count].a); 
+  $("#b").text("B: "+questions[count].b); 
+  $("#c").text("C: "+questions[count].c);
+  $("#d").text("D: "+questions[count].d);
+  }
+}; 
 
 function nextQuestion() {
   count++; 
   console.log(count);
-  $(".question").text(questions.two.ask);
-  $("#a").text("A: "+questions.two.a); 
-  $("#b").text("B: "+questions.two.b); 
-  $("#c").text("C: "+questions.two.c);
-  $("#d").text("D: "+questions.two.d);
-}
+  questionRotation();
+};
 
 
 function startGame() {
 
-    // TODO: Use showImage to hold the setInterval to run nextImage.
-    // count++ interval of 15 seconds 
-    showQuestion = setInterval(nextQuestion, 5000);
+    // TODO: Use setInterval to run nextQuestion.
+    // interval of 5 seconds 
+    showQuestion = setInterval(nextQuestion, 1000);
     console.log(count);
+    questionRotation(); 
 
-    $(".question").text(questions.one.ask);
-    $("#a").text("A: "+questions.one.a); 
-    $("#b").text("B: "+questions.one.b); 
-    $("#c").text("C: "+questions.one.c);
-    $("#d").text("D: "+questions.one.d);
+
     // this works but trying to hook to when they select the right answer 
   
 
@@ -149,11 +161,7 @@ function startGame() {
       // $(".statusMeme").prepend('<img src="assets/images/noresponse.jpg" />');
       // });
 
-      //  if (count === questions.length) {
-      // count = 0;
-      // } 
-  }
-
+  };
   // doesnt work function stopGame() {
   // clearInterval(showQuestion);
   // }
