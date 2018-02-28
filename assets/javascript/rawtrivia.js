@@ -138,6 +138,7 @@ function nextQuestion() {
 function stopGame() {
   count = 0; 
   console.log(count);
+  clearInterval(startGame);
   clearInterval(showQuestion);
 };
 
