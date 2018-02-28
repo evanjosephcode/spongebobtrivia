@@ -1,40 +1,50 @@
-body { /* Visual */ background: lightgrey;}
+body { 
+  background-image: url(../images/background.jpg);
+  background-repeat: repeat-y;;
+  background-size: 100%; 
+  background-color: black;
+  color: purple;
+  font-weight: bold;
+  font-size: 32px;
+}
 
-      #image-holder {
+#image-holder {
 
-        /* Positioning */
-         margin: 0 auto;
+/* Positioning */
 
-        /* Box-model */
-        width: 400px;
+/* Box-model */
+width: 400px;
 
-        /* Typography */
-        text-align: center;
+/* Typography */
+text-align: center;
+}
 
-      }
+#buttons {
 
-      #buttons {
+/* Positioning */
+margin: 50px 0;
 
-        /* Positioning */
-        margin: 50px 0;
+/* Typography */
+text-align: center;
+}
 
-        /* Typography */
-        text-align: center;
+#questions {
+  text-align: center;
+}
 
-      }
+button {
 
-      button {
+/* Box-model */
+width: 200px;
+height: 100px;
+background-color: green;
+color: white;
+}
 
-        /* Box-model */
-        width: 200px;
-        height: 100px;
+.question {
+margin-bottom: 30px;
+}
 
-      }
-
-      .question {
-        margin-bottom: 30px;
-      }
-
-      .statusMeme {
-        margin-top: 30px;
-      }
+.statusMeme {
+margin-top: 30px;
+}

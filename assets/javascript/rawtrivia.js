@@ -11,11 +11,12 @@ var showQuestion;
 //array of questions
 var questions = [
   {
-    ask: "which animal is spongebob's best friend?",
+    ask: "which species is spongebob's best friend?",
     a: "Starfish",
     b: "Squid",
     c: "Crab",
-    d: "Stingray", 
+    d: "Stingray",
+    answer: "a", 
   },
 
   {
@@ -24,13 +25,14 @@ var questions = [
     b: "Buzzfeed",
     c: "Krabby Patty",
     d: "Longjohn Bobbies",
+    answer: "c",
   },
 
   {
-    ask: "how big is Krabby Patty's arch nemesis, Plankton?",
-    a: "bigly yuge!",
+    ask: "how big of a guy is Krabby Patty's arch nemesis, Plankton?",
+    a: "yuge!",
     b: "average size, nothing special",
-    c: "wide",
+    c: "very wide",
     d: "extremely small",
   },
 
@@ -43,7 +45,7 @@ var questions = [
   },
 
   {
-    ask: "What does Sandy the snail wear to be able to breathe while underwater?",
+    ask: "What does Sandy the squirrel wear to be able to breathe while underwater?",
     a: "astronaut helmet",
     b: "defibrillator", 
     c: "gas mask",
@@ -97,6 +99,11 @@ var questions = [
 $("#start").click(startGame);
 $("#stop").click(stopGame);
 
+// trying to get it to find the answer every time 
+// if (questions[count].answer === #(answer) {
+// alert("YOU SERIOUSLY KICK ASS!");
+// }
+
 
 
 // may not be needed var randomNumber = Math.floor(Math.random() * questions.length);
@@ -112,6 +119,7 @@ function questionRotation() {
   } 
 
   else {
+  $(".statusMeme").empty();
   $(".question").text(questions[count].ask);
   $("#a").text("A: "+questions[count].a); 
   $("#b").text("B: "+questions[count].b); 
@@ -140,31 +148,70 @@ function startGame() {
     showQuestion = setInterval(nextQuestion, 4000);
     console.log(count);
     questionRotation(); 
+  };
 
 
     // this works but trying to hook to when they select the right answer for each 
   
+//answer key: 
+// 0a, 1c, 2d, 3b, 4a, 5c, 6b, 7d, 8c, 9b, 
 
-      $("#a").click(function() {
-        alert("you chose the right answer");
-        wins++;
-        console.log(wins);
-        $(".statusMeme").prepend('<img src="assets/images/wins.jpg" />');
-      }); 
-
-      $("#b").click(function() {
-        alert("you chose the wrong answer");
-        losses++;
-        console.log(losses);
-      $(".statusMeme").prepend('<img src="assets/images/losses.jpg" />');
-      });
-
-      //if NO CLICK function() {
-      // alert("you chose no answer, time's up");
-      // noResponse++;
-      // console.log(noResponse);
-      // $(".statusMeme").prepend('<img src="assets/images/noresponse.jpg" />');
-      // });
-
+if (count === 0) {
+  $("#a").click(function() {
+    win ();
+  });
+  $("#b,#c,#d").click(function() {
+    wrong ();
+  });
   
-};
+}
+
+if (count === 1) {
+  $("#c").click(function() {
+    win ();
+  });
+  $("#a,#b,#d").click(function() {
+    wrong ();
+  });
+  
+}
+
+
+
+if (count === 2) {
+  $("#d").click(function() {
+    win ();
+  });
+  $("#a,#b,#c").click(function() {
+    wrong ();
+  });
+  
+}
+
+if (count === 3) {
+  $("#b").click(function() {
+    win ();
+  });
+  $("#a,#c,#d").click(function() {
+    wrong ();
+  });
+  
+}
+
+// .... keeps going
+
+
+
+function win() {
+  alert("you chose the right answer");
+  wins++;
+  console.log(wins);
+  $(".statusMeme").prepend('<img src="assets/images/wins.jpg" />');
+}
+
+function wrong() {
+  alert("you chose the wrong answer");
+  losses++;
+  console.log(losses);
+  $(".statusMeme").prepend('<img src="assets/images/losses.jpg" />');
+}
