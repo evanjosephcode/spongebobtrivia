@@ -31,7 +31,7 @@ var questions = [
   {
     ask: "how big of a guy is Krabby Patty's arch nemesis, Plankton?",
     a: "yuge!",
-    b: "average size, nothing special",
+    b: "average size",
     c: "very wide",
     d: "extremely small",
   },
