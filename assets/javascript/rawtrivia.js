@@ -93,6 +93,8 @@ var questions = [
   },
 ];
 
+
+
 //answer key: 
 // 0a, 1c, 2d, 3b, 4a, 5c, 6b, 7d, 8c, 9b, 
 
@@ -120,13 +122,24 @@ function questionRotation() {
 
   else {
   $(".statusMeme").empty();
-  $(".question").text(questions[count].ask);
-  $("#a").text("A: "+questions[count].a); 
-  $("#b").text("B: "+questions[count].b); 
-  $("#c").text("C: "+questions[count].c);
-  $("#d").text("D: "+questions[count].d);
+  $(".question").text(questions[count].ask); // good so far 
+  // for displaying answers
+  for (var i = 0; i < questions[count].answers.length; i++) {
+    var answerChoice = $("<div>");
+    answerChoice.addClass("choices");
+    answerChoice.attr("data-name", questions[count].answers[i]); 
+    answerChoice.text(questions[count].answers[i]);
+    (".options").append(answerChoice); 
+  }
+
   }
 }; 
+
+$(".choices").click() {
+  // get value name of data attribute clicked === question[count].correctAnswer {
+    // win ()
+  }
+}
 
 function nextQuestion() {
   count++; 
