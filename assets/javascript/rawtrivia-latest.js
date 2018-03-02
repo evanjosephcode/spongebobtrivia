@@ -1,3 +1,10 @@
+// left to do : fix bugs with slow down/speed up on reset possibly, have it record noResponse as a Response, 
+// fix bugs with counters at end / some inconsistency in that and not displaying "wrong answer right answer is___ " and meme 
+// without repeating that string and meme in one question (i think 2nd or 3rd)
+// also have a timer that sorta works but counts up. commented out the timer that seemed more relevant but
+//  wouldnt display as cleanly or functionality wise be as consistent 
+// this project really stumped me in general and i spent a considerable amount of time on it too but i would love to understand what needs to be fixed :/ 
+
 
 //tallies 
 var wins = 0;
@@ -138,11 +145,60 @@ var stopwatch = {
   }
 }
 
+//cleaned up stopwatch timer, but couldnt get it to display, 
+// var stopwatch = {
+//   time: 10,
+
+//   count: function() {
+//     stopwatch.time--;
+//     $("#display").text(stopwatch.time);
+//   },
+
+//   start: function() {
+//       intervalId = setInterval(stopwatch.count, 1000);
+//   },
+
+//   stop: function() {
+//     clearInterval(intervalId);
+//   },
+
+//   reset: function() {
+//     clearInterval(intervalID);
+//     stopwatch.time = 10;
+//     stopwatch.start();
+//   },
+// }
+
+////////////////////////////////
+//another timer approach
+// var counter;
+// var time = 30;
+
+// //making countDown function
+// function runTimer() {
+//   counter = setInterval(function () {
+//     time = time - 1;
+//     $('#timer').text(time)
+//     if (time <= 0) {
+//       clearInterval(counter);
+//       endGame(); //game over
+//     }
+//   }, 1000); //setInterval function
+// } // function runTimer
+
+// function endGame() {
+//   //game over stop clock
+//   clearInterval(counter);
+
 
 
 $("#start").click(startGame);
-$("#stop").click(stopGame);
+$("#reset").click(resetGame);
 
+function gameOver() {
+  $(".statusMeme").prepend('<img src="assets/images/patrick.gif" />');
+  $(".question").append("Here's your wins: "+wins+" and here's your losses: "+losses+" and here's how many you didn't respond to: "+noResponse);
+}
 
 
 
@@ -150,14 +206,21 @@ function questionRotation() {
 
   // reset count to -1 bc then nextQuestion with count++ makes count= 0 and proceeds with else statement starting at questions[0]
   if (count === questions.length) {
-    count = -1;
+    $(".statusMeme, .options, .question, .correctAnswer").empty();
+    alert("finally something!");
+    gameOver();
+    clearInterval(nextQuestion);
+    clearInterval(showQuestion);
   } 
 
   else {
   $(".statusMeme").empty();
   $(".options").empty();
   stopwatch.reset();
-  $(".question").text(questions[count].question); // good so far 
+    //anything under 10 for count,
+    if (count < questions.length) {
+      $(".question").text(questions[count].question); // good so far 
+  }
   // for displaying answers
   for (var i = 0; i < questions[count].answers.length; i++) {
     var answerChoice = $("<button>");
@@ -182,35 +245,31 @@ function winloss() {
   }
 } 
 
-  // if (answerChoice.attr("data-name") === correctAnswer) {
-    // $(answerChoice).on("click", function () {
-    // alert("this works finally!");
-  // });
-// };
-
-// $(".choices").click() {
-  // get value name of data attribute clicked === question[count].correctAnswer {
-    // win ()
-
 function nextQuestion() {
   count++; 
-  console.log(count);
   $(".options, .correctAnswer").empty();
   questionRotation();
   $(document).on("click", ".choices", winloss)
 }
 
 
-function stopGame() {
+function resetGame() {
   count = 0; 
   console.log(count);
   clearInterval(showQuestion);
+  clearInterval(nextQuestion);
+  startGame();
 };
 
 
 function startGame() {
     // interval of 4 seconds before next question 
-    showQuestion = setInterval(nextQuestion, 5000);
+    showQuestion = setInterval(nextQuestion, 3000);
+    nextQuestion();
+    $("#start").remove(); 
+        if ($("#reset").is(':empty')) {
+            $("#reset").append("<button>Reset</button>");
+        }
     console.log(count);
     questionRotation(); 
     stopwatch.start();
@@ -219,24 +278,18 @@ function startGame() {
 function win() {
   console.log("you chose the right answer");
   wins++;
-  // console.log(wins);
   $(".statusMeme").prepend('<img src="assets/images/wins.jpg" />');
-  // turnChoicesOff();
 }
-
-// function turnChoicesOff(){
-//   document.querySelectorAll('.choices').forEach(function (choice){
-//   })
-// }
 
 function wrong() {
   console.log("you chose the wrong answer, the right answer is "+questions[count].correctAnswer);
   losses++;
-  // console.log(losses);
   $(".statusMeme").prepend('<img src="assets/images/losses.jpg" />');
   $(".correctAnswer").append("The correct answer is: " +questions[count].correctAnswer).css("color", "red").css("margin-bottom", "30px");
 }
 
+function endOfGame() {
+  $(".statusMeme").prepend('<img src="assets/images/lion.gif" />');
+}
 
-// $("#start").on("click", stopwatch.start);
 
